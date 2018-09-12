@@ -1,0 +1,12 @@
+policies:
+- name: ec2-stop-missing-tag-instances
+  resource: ec2
+  filters:
+    - or:
+      - "tag:environment": absent
+      - "tag:environment": SET prod/non-prod/sandbox for power
+  actions:
+      - stop
+      - type: tag
+        key: environment
+        value: SET prod/non-prod/sandbox for power

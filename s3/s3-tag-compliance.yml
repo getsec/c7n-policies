@@ -1,0 +1,17 @@
+policies:
+
+  - name: s3-tag-compliance
+    resource: s3
+    comment: |
+      Checks to make sure that the two tabs below are applied to the bucket. If not, it applies it to the resource.
+    filters:
+      - or:
+        - "tag:environment": absent
+        - "tag:classification": absent
+    actions:
+      - type: tag
+        key: environment
+        value: absent
+      - type: tag
+        key: classification
+        value: absent

@@ -1,0 +1,108 @@
+[
+  {
+    "Monitoring": {
+      "State": "disabled"
+    }, 
+    "PublicDnsName": "ec2-35-183-70-164.ca-central-1.compute.amazonaws.com", 
+    "State": {
+      "Code": 16, 
+      "Name": "running"
+    }, 
+    "EbsOptimized": false, 
+    "LaunchTime": "2018-09-12T12:59:14+00:00", 
+    "PublicIpAddress": "35.183.70.164", 
+    "PrivateIpAddress": "172.31.14.132", 
+    "ProductCodes": [], 
+    "VpcId": "vpc-104dd578", 
+    "CpuOptions": {
+      "CoreCount": 1, 
+      "ThreadsPerCore": 1
+    }, 
+    "StateTransitionReason": "", 
+    "InstanceId": "i-0bf1d7fa370c41672", 
+    "EnaSupport": true, 
+    "ImageId": "ami-ce1b96aa", 
+    "PrivateDnsName": "ip-172-31-14-132.ca-central-1.compute.internal", 
+    "KeyName": "getty-dev", 
+    "SecurityGroups": [
+      {
+        "GroupName": "launch-wizard-1", 
+        "GroupId": "sg-03788e7407632e712"
+      }
+    ], 
+    "ClientToken": "", 
+    "SubnetId": "subnet-321ec448", 
+    "InstanceType": "t2.micro", 
+    "NetworkInterfaces": [
+      {
+        "Status": "in-use", 
+        "MacAddress": "06:37:d6:09:50:5e", 
+        "SourceDestCheck": true, 
+        "VpcId": "vpc-104dd578", 
+        "Description": "", 
+        "Association": {
+          "PublicIp": "35.183.70.164", 
+          "PublicDnsName": "ec2-35-183-70-164.ca-central-1.compute.amazonaws.com", 
+          "IpOwnerId": "amazon"
+        }, 
+        "NetworkInterfaceId": "eni-0054660de20b5be54", 
+        "PrivateIpAddresses": [
+          {
+            "PrivateDnsName": "ip-172-31-14-132.ca-central-1.compute.internal", 
+            "Association": {
+              "PublicIp": "35.183.70.164", 
+              "PublicDnsName": "ec2-35-183-70-164.ca-central-1.compute.amazonaws.com", 
+              "IpOwnerId": "amazon"
+            }, 
+            "Primary": true, 
+            "PrivateIpAddress": "172.31.14.132"
+          }
+        ], 
+        "PrivateDnsName": "ip-172-31-14-132.ca-central-1.compute.internal", 
+        "Attachment": {
+          "Status": "attached", 
+          "DeviceIndex": 0, 
+          "DeleteOnTermination": true, 
+          "AttachmentId": "eni-attach-07b9a88f1729cc15a", 
+          "AttachTime": "2018-09-12T12:59:14+00:00"
+        }, 
+        "Groups": [
+          {
+            "GroupName": "launch-wizard-1", 
+            "GroupId": "sg-03788e7407632e712"
+          }
+        ], 
+        "Ipv6Addresses": [], 
+        "OwnerId": "736903191495", 
+        "SubnetId": "subnet-321ec448", 
+        "PrivateIpAddress": "172.31.14.132"
+      }
+    ], 
+    "SourceDestCheck": true, 
+    "Placement": {
+      "GroupName": "", 
+      "Tenancy": "default", 
+      "AvailabilityZone": "ca-central-1b"
+    }, 
+    "Hypervisor": "xen", 
+    "c7n:MatchedFilters": [
+      "tag:environment"
+    ], 
+    "BlockDeviceMappings": [
+      {
+        "DeviceName": "/dev/xvda", 
+        "Ebs": {
+          "Status": "attached", 
+          "DeleteOnTermination": true, 
+          "VolumeId": "vol-0e0459e0c26d85409", 
+          "AttachTime": "2018-09-12T12:59:15+00:00"
+        }
+      }
+    ], 
+    "Architecture": "x86_64", 
+    "RootDeviceType": "ebs", 
+    "RootDeviceName": "/dev/xvda", 
+    "VirtualizationType": "hvm", 
+    "AmiLaunchIndex": 0
+  }
+]
