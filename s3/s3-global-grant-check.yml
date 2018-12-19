@@ -1,8 +1,0 @@
-policies:
-
-   - name: s3-global-grant-check
-     resource: s3
-     description: |
-       Checks to see if any instances have any global grants
-     filters:
-      - type: global-grants

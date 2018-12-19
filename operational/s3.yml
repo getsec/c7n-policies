@@ -1,0 +1,31 @@
+# Simple Storage Service (s3) Policies
+
+policies:
+
+#####################################
+#####    Operational Policies   #####
+#####################################
+- name: s3-tag-compliance-env
+  resource: s3
+  comment: |
+    Checks to make sure that the two tabs below are applied to the bucket. If not, it applies it to the resource.
+  filters:
+    - or:
+      - "tag:wawa:environment": absent
+  actions:
+    - type: tag
+      key: wawa:environment
+      value: absent
+
+- name: s3-tag-compliance-data
+  resource: s3
+  comment: |
+    Checks to make sure that the two tabs below are applied to the bucket. If not, it applies it to the resource.
+  filters:
+    - or:
+      - "tag:data:classification": absent
+  actions:
+    - type: tag
+      key: data:classification
+      value: absent
+

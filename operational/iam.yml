@@ -1,0 +1,40 @@
+# Identity and Access Management (IAM) Policies
+policies:
+
+######################################
+#####    Operational Policies   ######
+######################################
+
+- name: iam-roles-with-inline-policies
+  resource: iam-role
+  filters:
+    - type: has-inline-policy
+      value: True
+
+- name: iam-user-with-old-key-age
+  resource: iam-user
+  filters:
+    - type: access-key
+      key: Status
+      value: Active
+    - type: access-key
+      key: CreateDate
+      value: 30
+      op: greater-than
+      value_type: age
+
+
+
+
+# # User with Key older than 90 days.
+# - name: iam-user-with-expired-key
+#   resource: iam-user
+#   filters:
+#     - type: access-key
+#       key: Status
+#       value: Active
+#     - type: access-key
+#       key: CreateDate
+#       value: 90
+#       op: greater-than
+#       value_type: age

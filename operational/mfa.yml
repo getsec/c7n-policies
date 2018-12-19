@@ -1,0 +1,18 @@
+policies:
+  - name: mfa-unused-test
+    resource: iam-user
+    description: |
+      Retrieve list of all IAM users
+      who have not enabled MFA and delete their ssh-keys, access-keys, and access to console
+    filters:
+      - type: credential
+        key: mfa_active
+        value: false
+    # actions:
+    #   - type: delete
+    #     options:
+    #       - ssh-keys
+    #       - console-access
+    #       - access-keys
+
+## TODO - THIS ONE NEEDS SOME WORK....

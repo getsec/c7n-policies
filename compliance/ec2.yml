@@ -1,0 +1,18 @@
+# Elastic Compute Cloud (EC2) Policies
+policies:
+
+####################################
+#####    Compliance Policies   #####
+####################################
+
+
+- name: ec2-missing-tags(classification/CreatedBy/environment)
+  resource: ec2
+  comment: Report on total count of non compliant instances
+  filters:
+    - or:
+      - "tag:classification": absent
+      - "tag:CreatedBy": absent
+      - "tag:environment": absent
+    - not:
+      - "State.Name": terminated

@@ -1,0 +1,10 @@
+policies:
+# Using a not equals value for a tag
+  - name: list-non-prod-ec2-instances
+    resource: ec2
+    filters:
+        - type: value
+          key: "tag:Environment"
+          value: "prod"
+          value_type: normalize # Ignore casing
+          op: not-equal

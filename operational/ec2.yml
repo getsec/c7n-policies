@@ -1,0 +1,18 @@
+# Elastic Compute Cloud (EC2) Policies
+policies:
+- name: ec2-auto-tag-user-who-created-instance
+  resource: ec2
+  description: |
+    Tag any new instance with the
+    Creators ID and Principle ID.
+  mode:
+    type: cloudtrail
+    role: arn:aws:iam::{account_id}:role/cloudcustodian
+    events:
+      - RunInstances
+  filters:
+    - tag:CreatedBy: absent
+  actions:
+    - type: auto-tag-user
+      tag: CreatorName
+      principal_id_tag: CreatorId

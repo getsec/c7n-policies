@@ -1,0 +1,36 @@
+policies:
+## ELASTC BLOCK STORE
+  - name: ebs-copy-instance-tags
+    resource: ebs
+    filters:
+    - type: value
+      key: "Attachments[0].Device"
+      value: not-null
+    actions:
+    - type: copy-instance-tags
+      tags:
+      - application_owner
+      - classification
+      - platform
+      - environmentpip
+      - cost_code
+      - tech_owner
+      - business_owner
+
+
+  - name: ec2-auto-tag-ownercontact
+    resource: ec2
+    description: |
+      Triggered when a new EC2 Instance is launched. Checks to see if
+      it's missing the OwnerContact tag. If missing it gets created
+      with the value of the ID of whomever called the RunInstances API
+    mode:
+      type: cloudtrail
+      role: arn:aws:iam::${AccountID}:role/custodian-auto-tagger
+      events:
+        - RunInstances
+    filters:
+      - tag:created_by: absent
+    actions:
+      - type: auto-tag-user
+        tag: created_by

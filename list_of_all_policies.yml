@@ -1,0 +1,107 @@
+policies:
+## EC2
+
+## IAM
+  - name: iam-users-with-no-mfa-and-console-access
+    resource: iam-user
+    description: |
+      Retrieve list of all IAM users
+      who have not enabled MFA and delete their ssh-keys, access-keys, and access to console
+    filters:
+      - type: credential
+        key: mfa_active
+        value: false
+      - type: credential
+        key: password_last_used
+        op: greater-than
+        value: 1
+  - name: iam-user-disable-never-used
+    description: |
+      Disable IAM accounts that have never been used in the last 60 days
+    resource: iam-user
+    filters:
+      - type: credential
+        key: access_keys.active
+        value: true
+      - type: credential
+        key: access_keys.last_used_date
+        value: absent
+      - type: credential
+        key: access_keys.last_rotated
+        value_type: age
+        value: 60
+        op: gte
+    actions:
+      - type: remove-keys
+        age: 60
+        disable: true
+  - name: iam-roles-with-inline-policies
+    resource: iam-role
+    filters:
+      - type: has-inline-policy
+        value: True
+  - name: iam-users-with-inline-policies
+    resource: iam-user
+    filters:
+      - type: has-inline-policy
+        value: True
+  - name: iam-admin-policies-attached-to-roles
+    resource: iam-policy
+    filters:
+      - type: used
+      - type: has-allow-all
+  - name: iam-user-key-older-than-50
+    resource: iam-user
+    filters:
+      - type: access-key
+        key: Status
+        value: Active
+      - type: access-key
+        key: CreateDate
+        value: 50
+        op: greater-than
+        value_type: age
+  - name: iam-user-key-older-than-60-out-of-compliance
+    resource: iam-user
+    filters:
+      - type: access-key
+        key: Status
+        value: Active
+      - type: access-key
+        key: CreateDate
+        value: 50
+        op: greater-than
+        value_type: age
+
+
+## SECURITY-GROUPS
+  - name: sg-open-access-on-administrative-port
+    resource: security-group
+    filters:
+      - or:
+        - type: ingress
+          Ports: [22, 3389, 21]
+          Cidr:
+            value: "0.0.0.0/0"
+        - type: ingress
+          Ports: [22, 3389, 21]
+          CidrV6:
+            value: "::/0"
+    actions:
+      - type: remove-permissions
+        ingress: matched
+  - name: sg-with-permissive-inbound-access
+    resource: security-group
+    filters:
+      - or:
+        - type: ingress
+          Cidr:
+            value: "10.0.0.0/8"
+        - type: ingress
+          Cidr:
+            value: "172.16.0.0/16"
+        - type: ingress
+          Cidr:
+            value: "192.168.0.0/24"
+
+##
